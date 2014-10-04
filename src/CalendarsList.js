@@ -1,44 +1,31 @@
 var UI = require('ui');
-var ajax = require('ajax');
-var GApi = require('GApi');
 var Util = require('Util');
+var Calendar = require('Calendar');
 var CalendarEventsList = require('CalendarEventsList');
 
 var CalendarsList = function() {
-  GApi.getAccessToken(function(accessToken) {
-    var url = 'https://www.googleapis.com/calendar/v3/users/me/calendarList?access_token=' +
-      encodeURIComponent(accessToken);
-    
-    ajax({
-      url: url,
-      type: 'json'
-    }, function(data) {
-      this.calendars = data.items;
-  
-      var items = this.calendars.map(function(item) {
+  Calendar.CalendarList.list(function(data) {
+    this.sections = [{
+      title: 'Calendars',
+      items: data.items.map(function(calendar) {
         return {
-          title: Util.trimLine(item.summary)
+          title: Util.trimLine(calendar.summary),
+          calendar: calendar
         };
-      });
-  
-      this.menu = new UI.Menu({
-        sections: [{
-          title: 'Calendars',
-          items: items
-        }]
-      });
-      this.menu.on('select', function(e) {
-        var calendar = this.calendars[e.itemIndex];
-        
-        if (calendar) {
-          new CalendarEventsList(calendar.id);
-        }
-      }.bind(this));
-      this.menu.show();
-    }.bind(this), function(error) {
-      console.log('The ajax request failed: ' + error);
-    }); 
-  });
+      })
+    }];
+
+    this.menu = new UI.Menu({
+      sections: this.sections
+    });
+
+    this.menu.on('select', function(e) {
+      var calendar = this.sections[e.sectionIndex].items[e.itemIndex].calendar;
+      new CalendarEventsList(calendar);
+    }.bind(this));
+
+    this.menu.show();
+  }.bind(this));
 };
 
 module.exports = CalendarsList;

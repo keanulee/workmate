@@ -46,7 +46,7 @@ var Util = {
     return str.replace(/<[^>]*>/g, "").replace(/&#(\d+);/g, function(match, dec) {
       return String.fromCharCode(dec);
     });
-}
+  }
 };
 
 module.exports = Util
