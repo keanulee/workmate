@@ -25,7 +25,7 @@ var CalendarEventsList = function(calendarId) {
       var sectionDate = Util.formatDate(now);
       data.items.forEach(function(event) {
         var item = {
-          title: event.summary,
+          title: Util.trimLine(event.summary),
           event: event
         };
         var itemDate;

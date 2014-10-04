@@ -8,6 +8,7 @@ var GApi = {
     var expiryDate = googleOauth['expiry_date'];
     
     if (expiryDate && now.valueOf() < expiryDate) {
+      console.log('Using token', googleOauth['access_token']);
       callback(googleOauth['access_token']);
     } else {
       var refreshToken = googleOauth['refresh_token'];
@@ -22,7 +23,8 @@ var GApi = {
           googleOauth['access_token'] = data['google_oauth']['access_token'];
           googleOauth['expiry_date'] = now.valueOf() + (data['google_oauth']['expires_in'] * 1000);
           Settings.option('google_oauth', googleOauth);
-  
+
+          console.log('New token', googleOauth['access_token']);
           callback(googleOauth['access_token']);
         } else {
           console.log('Error while refreshing google tokens');

@@ -1,6 +1,7 @@
 var UI = require('ui');
 var ajax = require('ajax');
 var GApi = require('GApi');
+var Util = require('Util');
 var CalendarEventsList = require('CalendarEventsList');
 
 var CalendarsList = function() {
@@ -15,11 +16,14 @@ var CalendarsList = function() {
       this.calendars = data.items;
   
       var items = this.calendars.map(function(item) {
-        return { title: item.summary };
+        return {
+          title: Util.trimLine(item.summary)
+        };
       });
   
       this.menu = new UI.Menu({
         sections: [{
+          title: 'Calendars',
           items: items
         }]
       });

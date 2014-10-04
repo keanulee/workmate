@@ -1,4 +1,5 @@
 var UI = require('ui');
+var MailLabelsList = require('MailLabelsList');
 var CalendarsList = require('CalendarsList');
 
 var MainMenu = function() {
@@ -14,7 +15,7 @@ var MainMenu = function() {
   this.menu.on('select', function(e) {
     switch (e.itemIndex) {
       case 0:
-        console.log('MailLabelsList not implemented yet!');
+        new MailLabelsList();
         break;
       case 1:
         new CalendarsList();
