@@ -46,6 +46,40 @@ var Util = {
     return str.replace(/<[^>]*>/g, "").replace(/&#(\d+);/g, function(match, dec) {
       return String.fromCharCode(dec);
     });
+  },
+  
+  getFriendlyLabelName: function(label) {
+    if (label.type === 'system') {
+      var match = /^CATEGORY_(.*)$/.exec(label.id);
+      if (match) {
+        return Util.capitalize(match[1]);
+      } else {
+        return Util.capitalize(label.name);
+      }
+    } else if (label.type === 'user') {
+      return label.name;
+    }
+  },
+  
+  capitalize: function(str) {
+    if (str) {
+      return str[0].toUpperCase() + str.substring(1).toLowerCase();
+    }
+    return '';
+  },
+  
+  systemLabelSortComparator: function(a, b) {
+    var priorities = {
+      UNREAD: 1,
+      IMPORTANT: 2,
+      INBOX: 3,
+      STARRED: 4,
+      DRAFT: 5,
+      SENT: 6,
+      SPAM: 7,
+      TRASH: 8
+    };
+    return priorities[a.label.id] - priorities[b.label.id];
   }
 };
 

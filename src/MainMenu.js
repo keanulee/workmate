@@ -6,9 +6,11 @@ var MainMenu = function() {
   this.menu = new UI.Menu({
     sections: [{
       items: [{
-        title: 'Mail'
+        title: 'Mail',
+        icon: 'images/menu_icon.png'
       }, {
-        title: 'Calendar'
+        title: 'Calendar',
+        icon: 'images/menu_icon.png'
       }]
     }]
   });

@@ -19,11 +19,11 @@ var Gmail = {
   },
   
   Threads: {
-    list: function(label, callback) {
+    list: function(labelId, callback) {
       GApi.getAccessToken(function(accessToken) {
         var url = 'https://www.googleapis.com/gmail/v1/users/me/threads?maxResults=20&access_token=' +
           encodeURIComponent(accessToken);
-        if (label) url += '&labelIds=' + encodeURIComponent(label.id);
+        if (labelId) url += '&labelIds=' + encodeURIComponent(labelId);
         
         // TODO: The normal threads.list request only returns IDs and not any user-visible strings,
         // so here we make a threads.get request for each of the returned threads, which is up to
@@ -48,6 +48,12 @@ var Gmail = {
                 for (var i = 0; i < data.threads.length; i++) {
                   if (data.threads[i].id === threadData.id) {
                     data.threads[i] = threadData;
+                    
+                    // Create a reference from each message back to the thread object.
+                    data.threads[i].messages.forEach(function(message) {
+                      message.thread = data.threads[i];
+                    });
+
                     break;
                   }
                 }
@@ -64,6 +70,23 @@ var Gmail = {
             callback(data);
           }
         }, function(error) {
+          console.log('The ajax request failed: ' + error);
+        }); 
+      });
+    },
+
+    modify: function(threadId, options, callback) {
+      GApi.getAccessToken(function(accessToken) {
+        var url = 'https://www.googleapis.com/gmail/v1/users/me/threads/' +
+          threadId + '/modify?access_token=' +
+          encodeURIComponent(accessToken);
+
+        ajax({
+          url: url,
+          method: 'post',
+          type: 'json',
+          data: options
+        }, callback, function(error) {
           console.log('The ajax request failed: ' + error);
         }); 
       });

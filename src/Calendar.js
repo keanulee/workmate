@@ -19,11 +19,11 @@ var Calendar = {
   },
   
   Calendars: {
-    list: function(calendar, callback) {
+    list: function(calendarId, callback) {
       GApi.getAccessToken(function(accessToken) {
         var now = new Date();
         var url = 'https://www.googleapis.com/calendar/v3/calendars/' +
-            encodeURIComponent(calendar.id) +
+            encodeURIComponent(calendarId) +
             '/events?maxResults=10&orderBy=startTime&singleEvents=true&timeMin=' +
             encodeURIComponent(now.toISOString()) + '&access_token=' +
             encodeURIComponent(accessToken);

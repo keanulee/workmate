@@ -4,33 +4,72 @@ var Gmail = require('Gmail');
 var MailThreadsList = require('MailThreadsList');
 
 var MailLabelsList = function() {
+  this.createMenu();
+
   Gmail.Labels.list(function(data) {
-    this.sections = [{
-      items: [{
-        title: 'All Mail',
-        label: null
-      }]
-    },{
-      title: 'Labels',
-      items: data.labels.map(function(label) {
-        return {
-          title: Util.trimLine(label.name),
-          label: label
-        };
-      })
-    }];
-
-    this.menu = new UI.Menu({
-      sections: this.sections
-    });
-
-    this.menu.on('select', function(e) {
-      var label = this.sections[e.sectionIndex].items[e.itemIndex].label;
-      new MailThreadsList(label);
-    }.bind(this));
-
-    this.menu.show();
+    this.labels = data.labels;
+    this.updateMenu();
   }.bind(this));
+};
+
+MailLabelsList.prototype.createMenu = function() {
+  this.menu = new UI.Menu({
+    sections: [{
+      title: 'Mail',
+      items: [{
+        title: 'Loading...'
+      }]
+    }]
+  });
+
+  this.menu.on('select', function(e) {
+    var label = e.item.label;
+    if (label) new MailThreadsList(label);
+  }.bind(this));
+
+  this.menu.show();
+};
+
+MailLabelsList.prototype.updateMenu = function() {
+  var systemItems = [];
+  var categoryItems = [];
+  var labelItems = [];
+  this.labels.forEach(function(label) {
+    if (label.type === 'system') {
+      var match = /^CATEGORY_(.*)$/.exec(label.id);
+      if (match) {
+        categoryItems.push({
+          title: Util.capitalize(Util.trimLine(match[1])),
+          label: label
+        });
+      } else {
+        systemItems.push({
+          title: Util.capitalize(Util.trimLine(label.name)),
+          label: label
+        });
+      }
+    } else if (label.type === 'user') {
+      labelItems.push({
+        title: Util.trimLine(label.name),
+        label: label
+      });
+    }
+  });
+  systemItems.sort(Util.systemLabelSortComparator);
+  systemItems.push({
+    title: 'All Mail',
+    label: null
+  });
+
+  this.menu.items(0, systemItems);
+  this.menu.section(1, {
+    title: 'Categories',
+    items: categoryItems
+  });
+  this.menu.section(2, {
+    title: 'Labels',
+    items: labelItems
+  });
 };
 
 module.exports = MailLabelsList;

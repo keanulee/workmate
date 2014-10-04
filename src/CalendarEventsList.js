@@ -4,7 +4,7 @@ var Calendar = require('Calendar');
 var CalendarEventCard = require('CalendarEventCard');
 
 var CalendarEventsList = function(calendar) {
-  Calendar.Calendars.list(calendar, function(data) {
+  Calendar.Calendars.list(calendar.id, function(data) {
     this.sections = [];
     var section = {
       title: 'Today',
