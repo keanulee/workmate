@@ -3,6 +3,14 @@ var Util = require('Util');
 var Calendar = require('Calendar');
 var CalendarEventCard = require('CalendarEventCard');
 
+/**
+ * TODOs:
+ * - Create menu before doing network request
+ * - Properly handle dates (API returns GMT date)
+ * - Put events that span multiple days in multiple sections
+ * - Handle events that started before today (hide everything before today)
+ */
+
 var CalendarEventsList = function(calendar) {
   Calendar.Calendars.list(calendar.id, function(data) {
     this.sections = [];
@@ -20,7 +28,6 @@ var CalendarEventsList = function(calendar) {
 
       if (event.start.date) {
         // All-day event
-        // TODO: put multiple all-day events into multiple date sections.
         itemDate = Util.formatDate(new Date(event.start.date));
       } else {
         var startTime = new Date(event.start.dateTime);
@@ -29,7 +36,6 @@ var CalendarEventsList = function(calendar) {
         item.subtitle = Util.formatTime(startTime) + '-' + Util.formatTime(endTime);
       }
 
-      // TODO: handle events that started before today (appear above the 'Today' section).
       if (itemDate === sectionDate) {
         section.items.push(item);
       } else {

@@ -37,6 +37,10 @@ MailActionsList.prototype.createMenu = function() {
       } else {
         options.addLabelIds = [label.id];
       }
+      
+      this.menu.item(e.sectionIndex, e.itemIndex, {
+        title: 'Loading...'
+      });
   
       Gmail.Threads.modify(this.message.threadId, options, function(data) {
         if (this.messagesList) this.messagesList.menu.hide();

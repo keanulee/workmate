@@ -4,28 +4,38 @@ var Calendar = require('Calendar');
 var CalendarEventsList = require('CalendarEventsList');
 
 var CalendarsList = function() {
+  this.createMenu();
   Calendar.CalendarList.list(function(data) {
-    this.sections = [{
-      title: 'Calendars',
-      items: data.items.map(function(calendar) {
-        return {
-          title: Util.trimLine(calendar.summary),
-          calendar: calendar
-        };
-      })
-    }];
-
-    this.menu = new UI.Menu({
-      sections: this.sections
-    });
-
-    this.menu.on('select', function(e) {
-      var calendar = this.sections[e.sectionIndex].items[e.itemIndex].calendar;
-      new CalendarEventsList(calendar);
-    }.bind(this));
-
-    this.menu.show();
+    this.calendars = data.items;
+    this.updateMenu();
   }.bind(this));
+};
+
+CalendarsList.prototype.createMenu = function() {
+  this.menu = new UI.Menu({
+    sections: [{
+      title: 'Calendars',
+      items: [{
+        title: 'Loading...'
+      }]
+    }]
+  });
+
+  this.menu.on('select', function(e) {
+    var calendar = e.item.calendar;
+    if (calendar) new CalendarEventsList(calendar);
+  }.bind(this));
+
+  this.menu.show();
+};
+
+CalendarsList.prototype.updateMenu = function() {
+  this.menu.items(0, this.calendars.map(function(calendar) {
+    return {
+      title: Util.trimLine(calendar.summary),
+      calendar: calendar
+    };
+  }));
 };
 
 module.exports = CalendarsList;
