@@ -10,18 +10,14 @@ var MailThreadsList = function(label) {
 
   this.createMenu();
 
-  var labelId = this.label ? this.label.id : null;
-  Gmail.Threads.list(labelId, function(data) {
+  Gmail.Threads.list(this.label.id, function(data) {
     this.threads = data.threads || [];
     this.updateMenu();
   }.bind(this));
 };
 
 MailThreadsList.prototype.createMenu = function() {
-  var title = 'All Mail';
-  if (this.label) {
-    title = Util.getFriendlyLabelName(this.label);
-  }
+  var title = Util.getFriendlyLabelName(this.label);
 
   this.menu = new UI.Menu({
     sections: [{
@@ -69,12 +65,22 @@ MailThreadsList.prototype.updateMenu = function() {
 };
 
 MailThreadsList.prototype.updateThread = function(thread) {
-  for (var i = 0; i < thread.messages.length; i++) {
-    if (thread.messages[i].labelIds.indexOf(this.label.id) !== -1) {
-      return;
+  if (this.label.id) {
+    for (var i = 0; i < thread.messages.length; i++) {
+      if (thread.messages[i].labelIds.indexOf(this.label.id) !== -1) {
+        return;
+      }
     }
+  } else {
+    // Do not remove from 'All Mail' if at least one message in the thread is not spam and not
+    // in the trash.
+    var inAllMail = thread.messages.some(function(message) {
+      console.log(message.labelIds.indexOf('SPAM'), message.labelIds.indexOf('TRASH'))
+      return (message.labelIds.indexOf('SPAM') === -1) && (message.labelIds.indexOf('TRASH') === -1);
+    });
+    if (inAllMail) return;
   }
-  
+    
   // Remove thread from the threads list if none of messages contain that label.
   var index = this.threads.indexOf(thread);
   this.threads.splice(index, 1);

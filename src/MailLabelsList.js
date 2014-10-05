@@ -58,7 +58,10 @@ MailLabelsList.prototype.updateMenu = function() {
   systemItems.sort(Util.systemLabelSortComparator);
   systemItems.push({
     title: 'All Mail',
-    label: null
+    label: {
+      name: 'All Mail',
+      id: null
+    }
   });
 
   this.menu.items(0, systemItems);

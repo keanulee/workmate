@@ -9,24 +9,44 @@
     "resources": {
         "media": [
             {
-                "file": "images/calendar.png",
-                "name": "IMAGE_CALENDAR",
+                "file": "images/menu_icon.png",
+                "name": "IMAGE_MENU_ICON",
                 "type": "png"
             },
             {
-                "file": "images/envelope.png",
-                "name": "IMAGE_ENVELOPE",
+                "file": "images/logo_splash.png",
+                "name": "IMAGE_LOGO_SPLASH",
+                "type": "png"
+            },
+            {
+                "file": "images/tile_splash.png",
+                "name": "IMAGE_TILE_SPLASH",
+                "type": "png"
+            },
+            {
+                "file": "fonts/UbuntuMono-Regular.ttf",
+                "name": "MONO_FONT_14",
+                "type": "font"
+            },
+            {
+                "file": "images/pushpin.png",
+                "name": "IMAGES_PUSHPIN_PNG",
                 "type": "png"
             },
             {
                 "file": "images/ok.png",
                 "menuIcon": true,
-                "name": "IMAGE_OK",
+                "name": "IMAGES_OK_PNG",
                 "type": "png"
             },
             {
-                "file": "images/pushpin.png",
-                "name": "IMAGE_PUSHPIN",
+                "file": "images/envelope.png",
+                "name": "IMAGES_ENVELOPE_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/calendar.png",
+                "name": "IMAGES_CALENDAR_PNG",
                 "type": "png"
             }
         ]

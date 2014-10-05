@@ -56,9 +56,8 @@ var Util = {
       } else {
         return Util.capitalize(label.name);
       }
-    } else if (label.type === 'user') {
-      return label.name;
-    }
+    } 
+    return label.name;
   },
   
   capitalize: function(str) {
