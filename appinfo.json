@@ -29,8 +29,13 @@
                 "type": "font"
             },
             {
-                "file": "images/pushpin.png",
-                "name": "IMAGES_PUSHPIN_PNG",
+                "file": "images/calendar.png",
+                "name": "IMAGES_CALENDAR_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/envelope.png",
+                "name": "IMAGES_ENVELOPE_PNG",
                 "type": "png"
             },
             {
@@ -40,13 +45,8 @@
                 "type": "png"
             },
             {
-                "file": "images/envelope.png",
-                "name": "IMAGES_ENVELOPE_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/calendar.png",
-                "name": "IMAGES_CALENDAR_PNG",
+                "file": "images/pushpin.png",
+                "name": "IMAGES_PUSHPIN_PNG",
                 "type": "png"
             }
         ]

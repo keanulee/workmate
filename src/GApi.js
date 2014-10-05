@@ -5,10 +5,9 @@ var GApi = {
   getAccessToken: function(callback) {
     var googleOauth = Settings.option('google_oauth');
     var now = new Date();
-    var expiryDate = googleOauth['expiry_date'];
+    var expiry = (googleOauth['created'] + googleOauth['expires_in']) * 1000;
     
-    if (expiryDate && now.valueOf() < expiryDate) {
-      console.log('Using token', googleOauth['access_token']);
+    if (now.valueOf() < expiry) {
       callback(googleOauth['access_token']);
     } else {
       var refreshToken = googleOauth['refresh_token'];
@@ -20,11 +19,10 @@ var GApi = {
         type: 'json'
       }, function(data) {
         if (data['google_oauth']) {
-          googleOauth['access_token'] = data['google_oauth']['access_token'];
-          googleOauth['expiry_date'] = now.valueOf() + (data['google_oauth']['expires_in'] * 1000);
+          for (var key in data['google_oauth']) {
+            googleOauth[key] = data['google_oauth'][key];
+          }
           Settings.option('google_oauth', googleOauth);
-
-          console.log('New token', googleOauth['access_token']);
           callback(googleOauth['access_token']);
         } else {
           console.log('Error while refreshing google tokens');
