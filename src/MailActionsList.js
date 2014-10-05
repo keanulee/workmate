@@ -75,20 +75,20 @@ MailActionsList.prototype.updateMenu = function() {
       if (match) {
         categoryItems.push({
           title: Util.capitalize(Util.trimLine(match[1])),
-          icon: hasLabel ? 'images/menu_icon.png' : null,
+          icon: hasLabel ? 'images/ok.png' : null,
           label: label
         });
       } else if (this.canModifyLabel(label)) {
         systemItems.push({
           title: Util.capitalize(Util.trimLine(label.name)),
-          icon: hasLabel ? 'images/menu_icon.png' : null,
+          icon: hasLabel ? 'images/ok.png' : null,
           label: label
         });
       }
     } else if (label.type === 'user') {
       labelItems.push({
         title: Util.trimLine(label.name),
-        icon: hasLabel ? 'images/menu_icon.png' : null,
+        icon: hasLabel ? 'images/ok.png' : null,
         label: label
       });
     }

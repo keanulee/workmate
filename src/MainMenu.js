@@ -8,13 +8,13 @@ var MainMenu = function() {
     sections: [{
       items: [{
         title: 'Mail',
-        icon: 'images/menu_icon.png'
+        icon: 'images/envelope.png'
       }, {
         title: 'Calendar',
-        icon: 'images/menu_icon.png'
+        icon: 'images/calendar.png'
       }, {
         title: 'Tasks',
-        icon: 'images/menu_icon.png'
+        icon: 'images/pushpin.png'
       }]
     }]
   });

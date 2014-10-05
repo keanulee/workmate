@@ -45,7 +45,7 @@ TasksTasksList.prototype.updateMenu = function() {
     this.menu.items(0, filteredTasks.map(function(task) {
       return {
         title: Util.trimLine(task.title),
-        icon: task.status === 'completed' ? 'images/menu_icon.png' : null,
+        icon: task.status === 'completed' ? 'images/ok.png' : null,
         task: task
       };
     }));
