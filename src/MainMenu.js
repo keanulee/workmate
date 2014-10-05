@@ -1,7 +1,7 @@
 var UI = require('ui');
-var MailLabelsList = require('MailLabelsList');
-var CalendarsList = require('CalendarsList');
-var TasksTasklistsList = require('TasksTasklistsList');
+var MailLabelsList = require('Mail/MailLabelsList');
+var CalendarsList = require('Calendar/CalendarsList');
+var TasksTasklistsList = require('Tasks/TasksTasklistsList');
 
 var MainMenu = function() {
   this.menu = new UI.Menu({
