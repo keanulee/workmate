@@ -1,6 +1,7 @@
 var UI = require('ui');
 var MailLabelsList = require('MailLabelsList');
 var CalendarsList = require('CalendarsList');
+var TasksTasklistsList = require('TasksTasklistsList');
 
 var MainMenu = function() {
   this.menu = new UI.Menu({
@@ -10,6 +11,9 @@ var MainMenu = function() {
         icon: 'images/menu_icon.png'
       }, {
         title: 'Calendar',
+        icon: 'images/menu_icon.png'
+      }, {
+        title: 'Tasks',
         icon: 'images/menu_icon.png'
       }]
     }]
@@ -21,6 +25,9 @@ var MainMenu = function() {
         break;
       case 1:
         new CalendarsList();
+        break;
+      case 2:
+        new TasksTasklistsList();
         break;
     }
   });
