@@ -9,7 +9,7 @@ var TasksActionsList = function(task, tasksList, taskCard) {
       title: Util.trimLine(task.title),
       items: [{
         title: 'Complete',
-        icon: task.status === 'completed' ? 'images/ok.png' : null
+        icon: task.status === 'completed' ? 'images/check.png' : null
       }, {
         title: 'Delete'
       }]
