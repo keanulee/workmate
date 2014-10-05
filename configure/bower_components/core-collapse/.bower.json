@@ -1,0 +1,20 @@
+{
+  "name": "core-collapse",
+  "private": true,
+  "dependencies": {
+    "polymer": "Polymer/polymer#master"
+  },
+  "devDependencies": {
+    "polymer-test-tools": "Polymer/polymer-test-tools#master"
+  },
+  "homepage": "https://github.com/Polymer/core-collapse",
+  "_release": "686fac37c5",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "686fac37c5840bc10de5566fd572960c7ce7f109"
+  },
+  "_source": "git://github.com/Polymer/core-collapse.git",
+  "_target": "master",
+  "_originalSource": "Polymer/core-collapse"
+}

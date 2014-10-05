@@ -1,0 +1,9 @@
+{
+  "name": "g-configure",
+  "version": "1.0",
+  "description": "Configuration page for G",
+  "homepage": "https://keanulee.github.io/g/configure",
+  "dependencies": {
+    "paper-elements": "Polymer/paper-elements#master"
+  }
+}
