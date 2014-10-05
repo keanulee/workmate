@@ -18,7 +18,8 @@ TasksTasksList.prototype.createMenu = function() {
     sections: [{
       title: Util.trimLine(this.tasklist.title),
       items: [{
-        title: 'Loading...'
+        title: 'Loading...',
+        icon: 'images/refresh.png'
       }]
     }]
   });

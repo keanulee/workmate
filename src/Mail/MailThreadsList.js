@@ -23,7 +23,8 @@ MailThreadsList.prototype.createMenu = function() {
     sections: [{
       title: Util.trimLine(title),
       items: [{
-        title: 'Loading...'
+        title: 'Loading...',
+        icon: 'images/refresh.png'
       }]
     }]
   });

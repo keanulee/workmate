@@ -21,7 +21,8 @@ MailActionsList.prototype.createMenu = function() {
     sections: [{
       title: Util.trimLine(subject),
       items: [{
-        title: 'Loading...'
+        title: 'Loading...',
+        icon: 'images/refresh.png'
       }]
     }]
   });
@@ -39,7 +40,8 @@ MailActionsList.prototype.createMenu = function() {
       }
       
       this.menu.item(e.sectionIndex, e.itemIndex, {
-        title: 'Loading...'
+        title: 'Loading...',
+        icon: 'images/refresh.png'
       });
   
       Gmail.Threads.modify(this.message.threadId, options, function(data) {

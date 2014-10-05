@@ -29,6 +29,11 @@
                 "type": "font"
             },
             {
+                "file": "images/refresh.png",
+                "name": "IMAGES_REFRESH_PNG",
+                "type": "png"
+            },
+            {
                 "file": "images/check.png",
                 "menuIcon": true,
                 "name": "IMAGES_CHECK_PNG",

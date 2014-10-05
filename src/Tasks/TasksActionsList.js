@@ -17,6 +17,11 @@ var TasksActionsList = function(task, tasksList, taskCard) {
   });
 
   this.menu.on('select', function(e) {
+    this.menu.item(e.sectionIndex, e.itemIndex, {
+      title: 'Loading...',
+      icon: 'images/refresh.png'
+    });
+
     switch (e.itemIndex) {
       case 0:
         task.status = task.status === 'needsAction' ? 'completed' : 'needsAction';
