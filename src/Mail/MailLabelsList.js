@@ -17,7 +17,8 @@ MailLabelsList.prototype.createMenu = function() {
     sections: [{
       title: 'Mail',
       items: [{
-        title: 'Loading...'
+        title: 'Loading...',
+        icon: 'images/refresh.png'
       }]
     }]
   });

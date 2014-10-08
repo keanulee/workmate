@@ -16,7 +16,8 @@ CalendarsList.prototype.createMenu = function() {
     sections: [{
       title: 'Calendars',
       items: [{
-        title: 'Loading...'
+        title: 'Loading...',
+        icon: 'images/refresh.png'
       }]
     }]
   });

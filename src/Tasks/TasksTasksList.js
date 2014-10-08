@@ -18,7 +18,8 @@ TasksTasksList.prototype.createMenu = function() {
     sections: [{
       title: Util.trimLine(this.tasklist.title),
       items: [{
-        title: 'Loading...'
+        title: 'Loading...',
+        icon: 'images/refresh.png'
       }]
     }]
   });
@@ -45,7 +46,7 @@ TasksTasksList.prototype.updateMenu = function() {
     this.menu.items(0, filteredTasks.map(function(task) {
       return {
         title: Util.trimLine(task.title),
-        icon: task.status === 'completed' ? 'images/ok.png' : null,
+        icon: task.status === 'completed' ? 'images/check.png' : null,
         task: task
       };
     }));

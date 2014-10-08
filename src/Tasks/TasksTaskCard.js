@@ -6,6 +6,7 @@ var TasksTaskCard = function(task, tasksList) {
   this.card = new UI.Card({
     title: task.title,
     body: task.notes,
+    icon: task.status === 'completed' ? 'images/check.png' : null,
     scrollable: true
   });
   

@@ -21,7 +21,8 @@ MailActionsList.prototype.createMenu = function() {
     sections: [{
       title: Util.trimLine(subject),
       items: [{
-        title: 'Loading...'
+        title: 'Loading...',
+        icon: 'images/refresh.png'
       }]
     }]
   });
@@ -39,7 +40,8 @@ MailActionsList.prototype.createMenu = function() {
       }
       
       this.menu.item(e.sectionIndex, e.itemIndex, {
-        title: 'Loading...'
+        title: 'Loading...',
+        icon: 'images/refresh.png'
       });
   
       Gmail.Threads.modify(this.message.threadId, options, function(data) {
@@ -75,20 +77,20 @@ MailActionsList.prototype.updateMenu = function() {
       if (match) {
         categoryItems.push({
           title: Util.capitalize(Util.trimLine(match[1])),
-          icon: hasLabel ? 'images/ok.png' : null,
+          icon: hasLabel ? 'images/check.png' : null,
           label: label
         });
       } else if (this.canModifyLabel(label)) {
         systemItems.push({
           title: Util.capitalize(Util.trimLine(label.name)),
-          icon: hasLabel ? 'images/ok.png' : null,
+          icon: hasLabel ? 'images/check.png' : null,
           label: label
         });
       }
     } else if (label.type === 'user') {
       labelItems.push({
         title: Util.trimLine(label.name),
-        icon: hasLabel ? 'images/ok.png' : null,
+        icon: hasLabel ? 'images/check.png' : null,
         label: label
       });
     }

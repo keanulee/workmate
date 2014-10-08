@@ -16,7 +16,8 @@ TasksTasklistsList.prototype.createMenu = function() {
     sections: [{
       title: 'Task Lists',
       items: [{
-        title: 'Loading...'
+        title: 'Loading...',
+        icon: 'images/refresh.png'
       }]
     }]
   });
