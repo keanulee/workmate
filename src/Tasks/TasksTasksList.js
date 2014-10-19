@@ -26,12 +26,26 @@ TasksTasksList.prototype.createMenu = function() {
 
   this.menu.on('select', function(e) {
     var task = e.item.task;
-    if (task) new TasksTaskCard(task, this);
+    if (task) {
+      this.menu.item(e.sectionIndex, e.itemIndex, {
+        title: Util.trimLine(task.title),
+        icon: 'images/refresh.png'
+      });
+
+      task.status = task.status === 'needsAction' ? 'completed' : 'needsAction';
+      Tasks.Tasks.update({
+        id: task.id,
+        selfLink: task.selfLink,
+        status: task.status
+      }, function(data) {
+        this.updateMenu();
+      }.bind(this));
+    }
   }.bind(this));
 
   this.menu.on('longSelect', function(e) {
     var task = e.item.task;
-    if (task) new TasksActionsList(task, this);
+    if (task) new TasksTaskCard(task, this);
   }.bind(this));
 
   this.menu.show();
@@ -46,7 +60,7 @@ TasksTasksList.prototype.updateMenu = function() {
     this.menu.items(0, filteredTasks.map(function(task) {
       return {
         title: Util.trimLine(task.title),
-        icon: task.status === 'completed' ? 'images/check.png' : null,
+        icon: task.status === 'completed' ? 'images/check.png' : 'images/uncheck.png',
         task: task
       };
     }));

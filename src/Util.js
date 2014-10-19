@@ -4,9 +4,9 @@ var Util = {
     return date.toTimeString().substring(0, 5);
   },
   
-  // '1992-05-17'
+  // 'Wed Jul 28'
   formatDate: function(date) {
-    return date.toISOString().substring(0, 10);
+    return date.toDateString().substring(0, 10);
   },
   
   trimLine: function(str) {
@@ -79,6 +79,14 @@ var Util = {
       TRASH: 8
     };
     return priorities[a.label.id] - priorities[b.label.id];
+  },
+  
+  isAllDayEvent: function(event) {
+    return !!event.start.date;
+  },
+  
+  getNextDate: function(date) {
+    return new Date(new Date(date.valueOf() + 86400000).toDateString());
   }
 };
 
