@@ -7,7 +7,12 @@ var TasksTasklistsList = function() {
   this.createMenu();
   Tasks.Tasklists.list(function(data) {
     this.tasklists = data.items;
-    this.updateMenu();
+    if (this.tasklists.length === 1) {
+      new TasksTasksList(this.tasklists[0]);
+      this.menu.hide();
+    } else {
+      this.updateMenu();
+    }
   }.bind(this));
 };
 

@@ -91,7 +91,9 @@ var Gmail = {
         }); 
       });
     }
-  }
+  },
+  
+  UNREAD_LABEL_ID: 'UNREAD'
 };
 
 module.exports = Gmail;

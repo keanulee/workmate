@@ -32,11 +32,18 @@ MailActionsList.prototype.createMenu = function() {
     if (label) {
       var hasLabel = this.message.labelIds.indexOf(label.id) !== -1;
   
-      var options = {};
+      var options = {
+        removeLabelIds: [],
+        addLabelIds: []
+      };
       if (hasLabel) {
-        options.removeLabelIds = [label.id];
+        options.removeLabelIds.push(label.id);
       } else {
-        options.addLabelIds = [label.id];
+        options.addLabelIds.push(label.id);
+      }
+      
+      if (label.id !== Gmail.UNREAD_LABEL_ID && this.message.labelIds.indexOf(Gmail.UNREAD_LABEL_ID) !== -1) {
+        options.removeLabelIds.push(Gmail.UNREAD_LABEL_ID);
       }
       
       this.menu.item(e.sectionIndex, e.itemIndex, {
@@ -77,20 +84,20 @@ MailActionsList.prototype.updateMenu = function() {
       if (match) {
         categoryItems.push({
           title: Util.capitalize(Util.trimLine(match[1])),
-          icon: hasLabel ? 'images/check.png' : null,
+          icon: hasLabel ? 'images/check.png' : 'images/uncheck.png',
           label: label
         });
       } else if (this.canModifyLabel(label)) {
         systemItems.push({
           title: Util.capitalize(Util.trimLine(label.name)),
-          icon: hasLabel ? 'images/check.png' : null,
+          icon: hasLabel ? 'images/check.png' : 'images/uncheck.png',
           label: label
         });
       }
     } else if (label.type === 'user') {
       labelItems.push({
         title: Util.trimLine(label.name),
-        icon: hasLabel ? 'images/check.png' : null,
+        icon: hasLabel ? 'images/check.png' : 'images/uncheck.png',
         label: label
       });
     }
