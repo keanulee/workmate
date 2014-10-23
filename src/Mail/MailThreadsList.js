@@ -60,7 +60,7 @@ MailThreadsList.prototype.updateMenu = function() {
     }));
   } else {
     this.menu.items(0, [{
-      title: '(No Threads)'
+      title: '(No Messages)'
     }]);
   }
 };
