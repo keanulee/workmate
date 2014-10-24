@@ -60,7 +60,7 @@ MailThreadsList.prototype.updateMenu = function() {
     }));
   } else {
     this.menu.items(0, [{
-      title: '(No Threads)'
+      title: '(No Messages)'
     }]);
   }
 };
@@ -76,7 +76,6 @@ MailThreadsList.prototype.updateThread = function(thread) {
     // Do not remove from 'All Mail' if at least one message in the thread is not spam and not
     // in the trash.
     var inAllMail = thread.messages.some(function(message) {
-      console.log(message.labelIds.indexOf('SPAM'), message.labelIds.indexOf('TRASH'))
       return (message.labelIds.indexOf('SPAM') === -1) && (message.labelIds.indexOf('TRASH') === -1);
     });
     if (inAllMail) return;

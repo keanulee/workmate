@@ -6,20 +6,27 @@ var Util = require('Util');
  * - Show/modify Yes/Maybe/No responses
  */
 var CalendarEventCard = function(event) {
-  var body;
+  var body, startDate, endDate, startDateString, endDateString;
   
   if (Util.isAllDayEvent(event)) {
-    var startDateString = Util.formatDate(new Date(event.start.date));
-    var endDateString = Util.formatDate(new Date(event.end.date));
+    startDate = Util.parseDate(event.start.date);
+    endDate = Util.parseDate(event.end.date);
+    
+    // The end date of all-day events is always the next date (when the event is no longer
+    // taking place), so set it back one day.
+    endDate.setDate(endDate.getDate() - 1);
+
+    startDateString = Util.formatDate(startDate);
+    endDateString = Util.formatDate(endDate);
     body = startDateString;
     if (startDateString !== endDateString) {
       body += ' to\n' + endDateString;
     }
   } else {
-    var startDate = new Date(event.start.dateTime);
-    var endDate = new Date(event.end.dateTime);
-    var startDateString = Util.formatDate(startDate);
-    var endDateString = Util.formatDate(endDate);
+    startDate = new Date(event.start.dateTime);
+    endDate = new Date(event.end.dateTime);
+    startDateString = Util.formatDate(startDate);
+    endDateString = Util.formatDate(endDate);
 
     body = startDateString;
     if (startDateString === endDateString) {
