@@ -29,28 +29,8 @@
                 "type": "font"
             },
             {
-                "file": "images/remove.png",
-                "name": "IMAGES_REMOVE_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/uncheck.png",
-                "name": "IMAGES_UNCHECK_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/pushpin.png",
-                "name": "IMAGES_PUSHPIN_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/envelope.png",
-                "name": "IMAGES_ENVELOPE_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/calendar.png",
-                "name": "IMAGES_CALENDAR_PNG",
+                "file": "images/refresh.png",
+                "name": "IMAGES_REFRESH_PNG",
                 "type": "png"
             },
             {
@@ -60,8 +40,28 @@
                 "type": "png"
             },
             {
-                "file": "images/refresh.png",
-                "name": "IMAGES_REFRESH_PNG",
+                "file": "images/calendar.png",
+                "name": "IMAGES_CALENDAR_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/envelope.png",
+                "name": "IMAGES_ENVELOPE_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/pushpin.png",
+                "name": "IMAGES_PUSHPIN_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/uncheck.png",
+                "name": "IMAGES_UNCHECK_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/remove.png",
+                "name": "IMAGES_REMOVE_PNG",
                 "type": "png"
             }
         ]

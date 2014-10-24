@@ -39,8 +39,12 @@ CalendarEventsList.prototype.createMenu = function() {
 CalendarEventsList.prototype.updateMenu = function() {
   var now = new Date();
   var today = new Date(now.toDateString());
+  var todayDateString = Util.formatDate(now);
+  var tomorrowDateString = Util.formatDate(Util.getNextDate(now));
 
   var dateToEventsMap = {};
+  dateToEventsMap[todayDateString] = [];
+
   function addEventToDate(event, date) {
     if (date >= today) {
       var dateString = Util.formatDate(date);
@@ -52,24 +56,20 @@ CalendarEventsList.prototype.updateMenu = function() {
   this.events.forEach(function(event) {
     var startDate, endDate;
     if (Util.isAllDayEvent(event)) {
-      // Correct for how GCal handles all day events.
-      startDate = Util.getNextDate(new Date(event.start.date));
-      endDate = new Date(event.end.date);
+      startDate = Util.parseDate(event.start.date);
+      endDate = Util.parseDate(event.end.date);
     } else {
       startDate = new Date(event.start.dateTime);
       endDate = new Date(event.end.dateTime);
     }
 
-    while (startDate <= endDate) {
+    while (startDate < endDate) {
       addEventToDate(event, startDate);
       startDate = Util.getNextDate(startDate);
     }
   }.bind(this));
   
   var i = 0;
-  var todayDateString = Util.formatDate(now);
-  var tomorrowDateString = Util.formatDate(Util.getNextDate(now));
-
   for (var dateString in dateToEventsMap) {
     var dateEvents = dateToEventsMap[dateString];
     
@@ -78,24 +78,31 @@ CalendarEventsList.prototype.updateMenu = function() {
     } else if (dateString === tomorrowDateString) {
       dateString = 'Tomorrow';
     }
-    var section = {
-      title: dateString,
-      items: dateEvents.map(function(event) {
-        var item = {
-          title: Util.trimLine(event.summary),
-          event: event
-        };
-        
-        if (!Util.isAllDayEvent(event)) {
-          item.subtitle = Util.formatTime(new Date(event.start.dateTime)) +
-            '-' + Util.formatTime(new Date(event.end.dateTime));
-        }
-        
-        return item;
-      })
-    };
     
-    this.menu.section(i, section);
+    var items = dateEvents.map(function(event) {
+      var item = {
+        title: Util.trimLine(event.summary),
+        event: event
+      };
+
+      if (!Util.isAllDayEvent(event)) {
+        item.subtitle = Util.formatTime(new Date(event.start.dateTime)) +
+          '-' + Util.formatTime(new Date(event.end.dateTime));
+      }
+
+      return item;
+    });
+
+    if (items.length === 0) {
+      items.push({
+        title: '(No events)'
+      });
+    }
+    
+    this.menu.section(i, {
+      title: dateString,
+      items: items
+    });
     i++;
   }
 };

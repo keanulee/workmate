@@ -3,7 +3,14 @@ var GApi = require('GApi');
 
 var Calendar = {
   CalendarList: {
+    listCache_: null,
+
     list: function(callback) {
+      if (this.listCache_) {
+        callback(this.listCache_);
+        return;
+      }
+
       GApi.getAccessToken(function(accessToken) {
         var url = 'https://www.googleapis.com/calendar/v3/users/me/calendarList?access_token=' +
           encodeURIComponent(accessToken);
@@ -11,10 +18,13 @@ var Calendar = {
         ajax({
           url: url,
           type: 'json'
-        }, callback, function(error) {
+        }, function(data) {
+          this.listCache_ = data;
+          callback(data);
+        }.bind(this), function(error) {
           console.log('The ajax request failed: ' + error);
         }); 
-      });
+      }.bind(this));
     }
   },
   
