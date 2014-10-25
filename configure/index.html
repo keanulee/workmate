@@ -4,11 +4,69 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <title>Configure Page</title>
 
-  <script src="bower_components/platform/platform.js"></script>
-
-  <link rel="import" href="configure-page.html">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body unresolved>
-  <configure-page></configure-page>
+<body>
+  <h1 id="reload">Welcome to G</h1>
+
+  <div class="pebble-preview">
+    <div class="image-container">
+      <!-- No spaces between img. -->
+      <img src="images/inbox.png"><img src="images/calendar.png"><img src="images/tasks.png">
+    </div>
+  </div>
+
+  <p>G lets you preview and manage Gmail messages, see your Google Calendar events, and manage your Google Tasks.</p>
+
+  <a class="btn btn-blue" id="signIn">Sign in with Google</a>
+  <a class="btn btn-red" id="signOut">Sign out of Google</a>
+  <script>
+  var ConfigurePage = {
+    data: {},
+
+    init: function() {
+      var hash = window.location.hash;
+      if (hash) {
+        this.data = JSON.parse(decodeURIComponent(hash.substring(1)));
+      }
+
+      if (this.data.google_oauth) {
+        document.getElementById('signIn').classList.add('hidden');
+      } else {
+        document.getElementById('signOut').classList.add('hidden');
+      }
+    },
+
+    signIn: function() {
+      window.location.href = 'https://legacy.keanulee.com/g/configure/google_oauth.php';
+    },
+
+    signOut: function() {
+      this.data = {
+        'google_oauth': null
+      };
+      window.location.href = 'pebblejs://close#' +
+        encodeURIComponent(JSON.stringify(this.data));
+    },
+
+    reload: function() {
+      window.location.reload(true /* forcedReload */);
+    }
+  };
+
+  document.getElementById('signIn').addEventListener('click', function() {
+    this.innerText = 'Signing in...';
+    ConfigurePage.signIn();
+  });
+  document.getElementById('signOut').addEventListener('click', function() {
+    this.innerText = 'Signing out...';
+    ConfigurePage.signOut();
+  });
+  document.getElementById('reload').addEventListener('click', function() {
+    ConfigurePage.reload();
+  });
+
+  ConfigurePage.init();
+  </script>
 </body>
 </html>
