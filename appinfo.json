@@ -29,6 +29,11 @@
                 "type": "font"
             },
             {
+                "file": "images/warning.png",
+                "name": "IMAGES_WARNING_PNG",
+                "type": "png"
+            },
+            {
                 "file": "images/refresh.png",
                 "name": "IMAGES_REFRESH_PNG",
                 "type": "png"

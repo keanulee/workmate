@@ -1,11 +1,12 @@
 var ajax = require('ajax');
 var GApi = require('GApi');
+var ErrorCard = require('ErrorCard');
 
 var Gmail = {
   Labels: {
     listCache_: null,
 
-    list: function(callback) {
+    list: function(callback, errorCallback) {
       if (this.listCache_) {
         callback(this.listCache_);
         return;
@@ -22,14 +23,15 @@ var Gmail = {
           this.listCache_ = data;
           callback(data);
         }.bind(this), function(error) {
-          console.log('The ajax request failed: ' + error);
+          new ErrorCard('Could not get labels list');
+          if (errorCallback) errorCallback();
         }); 
-      }.bind(this));
+      }.bind(this), errorCallback);
     }
   },
   
   Threads: {
-    list: function(labelId, callback) {
+    list: function(labelId, callback, errorCallback) {
       GApi.getAccessToken(function(accessToken) {
         var url = 'https://www.googleapis.com/gmail/v1/users/me/threads?maxResults=20&access_token=' +
           encodeURIComponent(accessToken);
@@ -71,21 +73,21 @@ var Gmail = {
                 numThreadsToCheck--;
                 if (numThreadsToCheck <= 0) callback(data);
               }, function(error) {
-                console.log('The ajax request failed: ' + error);
-                numThreadsToCheck--;
-                if (numThreadsToCheck <= 0) callback(data);
+                new ErrorCard('Could not get messages');
+                if (errorCallback) errorCallback();
               });
             });
           } else {
             callback(data);
           }
         }, function(error) {
-          console.log('The ajax request failed: ' + error);
+          new ErrorCard('Could not get threads');
+          if (errorCallback) errorCallback();
         }); 
-      });
+      }, errorCallback);
     },
 
-    modify: function(threadId, options, callback) {
+    modify: function(threadId, options, callback, errorCallback) {
       GApi.getAccessToken(function(accessToken) {
         var url = 'https://www.googleapis.com/gmail/v1/users/me/threads/' +
           threadId + '/modify?access_token=' +
@@ -97,9 +99,10 @@ var Gmail = {
           type: 'json',
           data: options
         }, callback, function(error) {
-          console.log('The ajax request failed: ' + error);
+          new ErrorCard('Could not modify labels');
+          if (errorCallback) errorCallback();
         }); 
-      });
+      }, errorCallback);
     }
   },
   

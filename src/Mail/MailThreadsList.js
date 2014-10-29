@@ -13,6 +13,8 @@ var MailThreadsList = function(label) {
   Gmail.Threads.list(this.label.id, function(data) {
     this.threads = data.threads || [];
     this.updateMenu();
+  }.bind(this), function() {
+    this.menu.hide();
   }.bind(this));
 };
 

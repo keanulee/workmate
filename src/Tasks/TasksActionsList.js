@@ -25,14 +25,17 @@ var TasksActionsList = function(task, tasksList, taskCard) {
 
     switch (e.itemIndex) {
       case 0:
-        task.status = task.status === 'needsAction' ? 'completed' : 'needsAction';
+        var newStatus = task.status === 'needsAction' ? 'completed' : 'needsAction';
         Tasks.Tasks.update({
           id: task.id,
           selfLink: task.selfLink,
-          status: task.status
+          status: newStatus
         }, function(data) {
+          task.status = newStatus;
           if (taskCard) taskCard.card.hide();
           tasksList.updateMenu();
+          this.menu.hide();
+        }.bind(this), function() {
           this.menu.hide();
         }.bind(this));
         break;
@@ -40,6 +43,8 @@ var TasksActionsList = function(task, tasksList, taskCard) {
         Tasks.Tasks.delete(task, function(data) {
           if (taskCard) taskCard.card.hide();
           tasksList.removeTask(task);
+          this.menu.hide();
+        }.bind(this), function() {
           this.menu.hide();
         }.bind(this));
         break;

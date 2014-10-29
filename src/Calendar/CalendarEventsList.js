@@ -9,6 +9,8 @@ var CalendarEventsList = function(calendar) {
   Calendar.Calendars.list(calendar.id, function(data) {
     this.events = data.items;
     this.updateMenu();
+  }.bind(this), function() {
+    this.menu.hide();
   }.bind(this));
 };
 

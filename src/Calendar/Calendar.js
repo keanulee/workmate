@@ -1,11 +1,12 @@
 var ajax = require('ajax');
 var GApi = require('GApi');
+var ErrorCard = require('ErrorCard');
 
 var Calendar = {
   CalendarList: {
     listCache_: null,
 
-    list: function(callback) {
+    list: function(callback, errorCallback) {
       if (this.listCache_) {
         callback(this.listCache_);
         return;
@@ -22,14 +23,15 @@ var Calendar = {
           this.listCache_ = data;
           callback(data);
         }.bind(this), function(error) {
-          console.log('The ajax request failed: ' + error);
+          new ErrorCard('Could not get calendars list');
+          if (errorCallback) errorCallback();
         }); 
-      }.bind(this));
+      }.bind(this), errorCallback);
     }
   },
   
   Calendars: {
-    list: function(calendarId, callback) {
+    list: function(calendarId, callback, errorCallback) {
       GApi.getAccessToken(function(accessToken) {
         var now = new Date();
         var url = 'https://www.googleapis.com/calendar/v3/calendars/' +
@@ -42,9 +44,10 @@ var Calendar = {
           url: url,
           type: 'json'
         }, callback, function(error) {
-          console.log('The ajax request failed: ' + error);
+          new ErrorCard('Could not get calendar events');
+          if (errorCallback) errorCallback();
         });
-      });
+      }, errorCallback);
     }
   }
 };

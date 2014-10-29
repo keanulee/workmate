@@ -12,6 +12,8 @@ var MailActionsList = function(message, threadsList, messagesList, messageCard) 
   Gmail.Labels.list(function(data) {
     this.labels = data.labels;
     this.updateMenu();
+  }.bind(this), function() {
+    this.menu.hide();
   }.bind(this));
 };
 
@@ -65,6 +67,8 @@ MailActionsList.prototype.createMenu = function() {
           }
         });
         this.threadsList.updateThread(this.message.thread);
+        this.menu.hide();
+      }.bind(this), function() {
         this.menu.hide();
       }.bind(this));
     }
