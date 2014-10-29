@@ -13,6 +13,8 @@ var TasksTasklistsList = function() {
     } else {
       this.updateMenu();
     }
+  }.bind(this), function() {
+    this.menu.hide();
   }.bind(this));
 };
 

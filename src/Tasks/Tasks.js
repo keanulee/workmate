@@ -1,11 +1,12 @@
 var ajax = require('ajax');
 var GApi = require('GApi');
+var ErrorCard = require('ErrorCard');
 
 var Tasks = {
   Tasklists: {
     listCache_: null,
 
-    list: function(callback) {
+    list: function(callback, errorCallback) {
       if (this.listCache_) {
         callback(this.listCache_);
         return;
@@ -22,14 +23,15 @@ var Tasks = {
           this.listCache_ = data;
           callback(data);
         }.bind(this), function(error) {
-          console.log('The ajax request failed: ' + error);
+          new ErrorCard('Could not get task lists');
+          if (errorCallback) errorCallback();
         }); 
-      }.bind(this));
+      }.bind(this), errorCallback);
     }
   },
   
   Tasks: {
-    list: function(tasklistId, callback) {
+    list: function(tasklistId, callback, errorCallback) {
       GApi.getAccessToken(function(accessToken) {
         var url = 'https://www.googleapis.com/tasks/v1/lists/' +
             encodeURIComponent(tasklistId) +
@@ -40,12 +42,13 @@ var Tasks = {
           url: url,
           type: 'json'
         }, callback, function(error) {
-          console.log('The ajax request failed: ' + error);
+          new ErrorCard('Could not get tasks');
+          if (errorCallback) errorCallback();
         });
-      });
+      }, errorCallback);
     },
     
-    update: function(task, callback) {
+    update: function(task, callback, errorCallback) {
       GApi.getAccessToken(function(accessToken) {
         var url = task.selfLink + '?access_token=' +
             encodeURIComponent(accessToken);
@@ -56,12 +59,13 @@ var Tasks = {
           method: 'put',
           data: task
         }, callback, function(error) {
-          console.log('The ajax request failed: ' + error);
+          new ErrorCard('Could not update task');
+          if (errorCallback) errorCallback();
         });
-      });
+      }, errorCallback);
     },
     
-    'delete': function(task, callback) {
+    'delete': function(task, callback, errorCallback) {
       GApi.getAccessToken(function(accessToken) {
         var url = task.selfLink + '?access_token=' +
             encodeURIComponent(accessToken);
@@ -70,9 +74,10 @@ var Tasks = {
           url: url,
           method: 'delete'
         }, callback, function(error) {
-          console.log('The ajax request failed: ' + error);
+          new ErrorCard('Could not delete task');
+          if (errorCallback) errorCallback();
         });
-      });
+      }, errorCallback);
     }
   }
 };

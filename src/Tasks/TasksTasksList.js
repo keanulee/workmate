@@ -10,6 +10,8 @@ var TasksTasksList = function(tasklist) {
   Tasks.Tasks.list(tasklist.id, function(data) {
     this.tasks = data.items;
     this.updateMenu();
+  }.bind(this), function() {
+    this.menu.hide();
   }.bind(this));
 };
 
@@ -32,12 +34,15 @@ TasksTasksList.prototype.createMenu = function() {
         icon: 'images/refresh.png'
       });
 
-      task.status = task.status === 'needsAction' ? 'completed' : 'needsAction';
+      var newStatus = task.status === 'needsAction' ? 'completed' : 'needsAction';
       Tasks.Tasks.update({
         id: task.id,
         selfLink: task.selfLink,
-        status: task.status
+        status: newStatus
       }, function(data) {
+        task.status = newStatus;
+        this.updateMenu();
+      }.bind(this), function() {
         this.updateMenu();
       }.bind(this));
     }

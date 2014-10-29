@@ -8,6 +8,8 @@ var CalendarsList = function() {
   Calendar.CalendarList.list(function(data) {
     this.calendars = data.items;
     this.updateMenu();
+  }.bind(this), function() {
+    this.menu.hide();
   }.bind(this));
 };
 
