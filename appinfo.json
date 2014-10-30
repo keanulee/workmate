@@ -4,7 +4,7 @@
         "configurable"
     ],
     "companyName": "keanulee517@gmail.com",
-    "longName": "g",
+    "longName": "Workmate",
     "projectType": "pebblejs",
     "resources": {
         "media": [
@@ -71,7 +71,7 @@
             }
         ]
     },
-    "shortName": "g",
+    "shortName": "Workmate",
     "uuid": "7c2a0083-ca8c-46ca-9900-737b250801c5",
     "versionCode": 1,
     "versionLabel": "1.0",

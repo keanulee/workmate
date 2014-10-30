@@ -13,7 +13,7 @@ var GApi = {
         callback(googleOauth['access_token']);
       } else {
         var refreshToken = googleOauth['refresh_token'];
-        var url = 'https://keanulee.com/g/configure/google_oauth.php?refresh_token=' +
+        var url = 'https://legacy.keanulee.com/workmate/configure/google_oauth.php?refresh_token=' +
             encodeURIComponent(refreshToken);
         
         ajax({
