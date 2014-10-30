@@ -10,6 +10,7 @@
         "media": [
             {
                 "file": "images/menu_icon.png",
+                "menuIcon": true,
                 "name": "IMAGE_MENU_ICON",
                 "type": "png"
             },
@@ -29,6 +30,16 @@
                 "type": "font"
             },
             {
+                "file": "images/uncheck.png",
+                "name": "IMAGES_UNCHECK_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/check.png",
+                "name": "IMAGES_CHECK_PNG",
+                "type": "png"
+            },
+            {
                 "file": "images/warning.png",
                 "name": "IMAGES_WARNING_PNG",
                 "type": "png"
@@ -36,12 +47,6 @@
             {
                 "file": "images/refresh.png",
                 "name": "IMAGES_REFRESH_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/check.png",
-                "menuIcon": true,
-                "name": "IMAGES_CHECK_PNG",
                 "type": "png"
             },
             {
@@ -57,11 +62,6 @@
             {
                 "file": "images/pushpin.png",
                 "name": "IMAGES_PUSHPIN_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/uncheck.png",
-                "name": "IMAGES_UNCHECK_PNG",
                 "type": "png"
             },
             {
