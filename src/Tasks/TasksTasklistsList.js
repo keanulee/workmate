@@ -6,7 +6,7 @@ var TasksTasksList = require('TasksTasksList');
 var TasksTasklistsList = function() {
   this.createMenu();
   Tasks.Tasklists.list(function(data) {
-    this.tasklists = data.items;
+    this.tasklists = data.items || [];
     if (this.tasklists.length === 1) {
       new TasksTasksList(this.tasklists[0]);
       this.menu.hide();

@@ -8,7 +8,7 @@ var TasksTasksList = function(tasklist) {
   this.tasklist = tasklist;
   this.createMenu();
   Tasks.Tasks.list(tasklist.id, function(data) {
-    this.tasks = data.items;
+    this.tasks = data.items || [];
     this.updateMenu();
   }.bind(this), function() {
     this.menu.hide();
