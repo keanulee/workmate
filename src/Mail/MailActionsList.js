@@ -10,7 +10,7 @@ var MailActionsList = function(message, threadsList, messagesList, messageCard) 
   
   this.createMenu();
   Gmail.Labels.list(function(data) {
-    this.labels = data.labels;
+    this.labels = data.labels || [];
     this.updateMenu();
   }.bind(this), function() {
     this.menu.hide();
