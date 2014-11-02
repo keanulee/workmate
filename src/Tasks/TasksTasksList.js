@@ -13,6 +13,8 @@ var TasksTasksList = function(tasklist) {
   }.bind(this), function() {
     this.menu.hide();
   }.bind(this));
+
+  Util.sendGAEvent('tasks', 'tasks-list');
 };
 
 TasksTasksList.prototype.createMenu = function() {
@@ -45,6 +47,8 @@ TasksTasksList.prototype.createMenu = function() {
       }.bind(this), function() {
         this.updateMenu();
       }.bind(this));
+      
+      Util.sendGAEvent('tasks', 'tasks-modify');
     }
   }.bind(this));
 

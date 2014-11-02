@@ -12,6 +12,8 @@ var CalendarEventsList = function(calendar) {
   }.bind(this), function() {
     this.menu.hide();
   }.bind(this));
+
+  Util.sendGAEvent('calendar', 'events-list');
 };
 
 CalendarEventsList.prototype.createMenu = function() {

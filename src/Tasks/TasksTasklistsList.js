@@ -16,6 +16,8 @@ var TasksTasklistsList = function() {
   }.bind(this), function() {
     this.menu.hide();
   }.bind(this));
+
+  Util.sendGAEvent('tasks', 'tasklists-list');
 };
 
 TasksTasklistsList.prototype.createMenu = function() {

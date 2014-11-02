@@ -1,10 +1,6 @@
 var UI = require('ui');
 var Util = require('Util');
 
-/**
- * TODOs:
- * - Show/modify Yes/Maybe/No responses
- */
 var CalendarEventCard = function(event) {
   var body, startDate, endDate, startDateString, endDateString;
   

@@ -1,6 +1,7 @@
 var ajax = require('ajax');
 var GApi = require('GApi');
 var ErrorCard = require('ErrorCard');
+var Util = require('Util');
 
 var Gmail = {
   Labels: {
