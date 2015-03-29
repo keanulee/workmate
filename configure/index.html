@@ -24,10 +24,17 @@
   var ConfigurePage = {
     data: {},
 
+    returnTo: 'pebblejs://close#',
+
     init: function() {
       var hash = window.location.hash;
       if (hash) {
-        this.data = JSON.parse(decodeURIComponent(hash.substring(1)));
+        this.data = JSON.parse(decodeURIComponent(/#([^?]*)/.exec(hash)[1]));
+      }
+
+      var returnTo = /return_to=([^#?&]*)/.exec(window.location.href);
+      if (returnTo) {
+        this.returnTo = decodeURIComponent(returnTo[1]);
       }
 
       if (this.data.google_oauth) {
@@ -38,14 +45,16 @@
     },
 
     signIn: function() {
-      window.location.href = 'https://legacy.keanulee.com/workmate/configure/google_oauth.php';
+      window.location.href =
+        'https://legacy.keanulee.com/workmate/configure/google_oauth.php?state=' +
+        encodeURIComponent(this.returnTo.replace(':','::'));
     },
 
     signOut: function() {
       this.data = {
         'google_oauth': null
       };
-      window.location.href = 'pebblejs://close#' +
+      window.location.href = this.returnTo +
         encodeURIComponent(JSON.stringify(this.data));
     },
 
