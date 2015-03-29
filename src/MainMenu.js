@@ -1,4 +1,5 @@
 var UI = require('ui');
+var Util = require('Util');
 var MailLabelsList = require('Mail/MailLabelsList');
 var CalendarsList = require('Calendar/CalendarsList');
 var TasksTasklistsList = require('Tasks/TasksTasklistsList');
@@ -32,6 +33,8 @@ var MainMenu = function() {
     }
   });
   this.menu.show();
+
+  Util.sendGAEvent('main-menu', 'app-launch');
 };
 
 module.exports = MainMenu;

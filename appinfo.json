@@ -3,7 +3,7 @@
     "capabilities": [
         "configurable"
     ],
-    "companyName": "keanulee517@gmail.com",
+    "companyName": "Keanu Lee",
     "longName": "Workmate",
     "projectType": "pebblejs",
     "resources": {
@@ -14,8 +14,33 @@
                 "type": "font"
             },
             {
-                "file": "images/uncheck.png",
-                "name": "IMAGES_UNCHECK_PNG",
+                "file": "images/remove.png",
+                "name": "IMAGES_REMOVE_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/pushpin.png",
+                "name": "IMAGES_PUSHPIN_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/envelope.png",
+                "name": "IMAGES_ENVELOPE_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/calendar.png",
+                "name": "IMAGES_CALENDAR_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/refresh.png",
+                "name": "IMAGES_REFRESH_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/warning.png",
+                "name": "IMAGES_WARNING_PNG",
                 "type": "png"
             },
             {
@@ -25,39 +50,14 @@
                 "type": "png"
             },
             {
-                "file": "images/warning.png",
-                "name": "IMAGES_WARNING_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/refresh.png",
-                "name": "IMAGES_REFRESH_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/calendar.png",
-                "name": "IMAGES_CALENDAR_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/envelope.png",
-                "name": "IMAGES_ENVELOPE_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/pushpin.png",
-                "name": "IMAGES_PUSHPIN_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/remove.png",
-                "name": "IMAGES_REMOVE_PNG",
+                "file": "images/uncheck.png",
+                "name": "IMAGES_UNCHECK_PNG",
                 "type": "png"
             }
         ]
     },
     "shortName": "Workmate",
-    "uuid": "7c2a0083-ca8c-46ca-9900-737b250801c5",
+    "uuid": "d40e830b-84cc-4a2e-b673-178762b1bc57",
     "versionCode": 1,
     "versionLabel": "1.0",
     "watchapp": {

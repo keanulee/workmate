@@ -7,11 +7,13 @@ var CalendarEventsList = function(calendar) {
   this.createMenu();
 
   Calendar.Calendars.list(calendar.id, function(data) {
-    this.events = data.items;
+    this.events = data.items || [];
     this.updateMenu();
   }.bind(this), function() {
     this.menu.hide();
   }.bind(this));
+
+  Util.sendGAEvent('calendar', 'events-list');
 };
 
 CalendarEventsList.prototype.createMenu = function() {

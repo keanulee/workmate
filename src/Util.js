@@ -1,4 +1,6 @@
 var UI = require('ui');
+var ajax = require('ajax');
+var appinfo = require('appinfo.json');
 
 var Util = {
   // Properly converts YYYY-MM-DD to a Date object in the local timezone.
@@ -101,7 +103,23 @@ var Util = {
     var nextDate = new Date(date.toDateString());
     nextDate.setDate(nextDate.getDate() + 1);
     return nextDate;
+  },
+  
+  sendGAEvent: function(action, label) {
+    ajax({
+      url: 'https://www.google-analytics.com/collect',
+      method: 'post',
+      data: {
+        v: 1,
+        tid: 'UA-39573523-5',
+        cid: Pebble.getAccountToken(),
+        t: 'event',
+        ec: 'workmate-app-' + appinfo.versionLabel,
+        ea: action,
+        el: label
+      }
+    });
   }
 };
 
-module.exports = Util
+module.exports = Util;

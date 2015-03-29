@@ -10,11 +10,13 @@ var MailActionsList = function(message, threadsList, messagesList, messageCard) 
   
   this.createMenu();
   Gmail.Labels.list(function(data) {
-    this.labels = data.labels;
+    this.labels = data.labels || [];
     this.updateMenu();
   }.bind(this), function() {
     this.menu.hide();
   }.bind(this));
+
+  Util.sendGAEvent('mail', 'mail-actions-list');
 };
 
 MailActionsList.prototype.createMenu = function() {
@@ -71,6 +73,8 @@ MailActionsList.prototype.createMenu = function() {
       }.bind(this), function() {
         this.menu.hide();
       }.bind(this));
+
+      Util.sendGAEvent('mail', 'mail-threads-modify');
     }
   }.bind(this));
 

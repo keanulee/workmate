@@ -8,11 +8,13 @@ var TasksTasksList = function(tasklist) {
   this.tasklist = tasklist;
   this.createMenu();
   Tasks.Tasks.list(tasklist.id, function(data) {
-    this.tasks = data.items;
+    this.tasks = data.items || [];
     this.updateMenu();
   }.bind(this), function() {
     this.menu.hide();
   }.bind(this));
+
+  Util.sendGAEvent('tasks', 'tasks-list');
 };
 
 TasksTasksList.prototype.createMenu = function() {
@@ -45,6 +47,8 @@ TasksTasksList.prototype.createMenu = function() {
       }.bind(this), function() {
         this.updateMenu();
       }.bind(this));
+      
+      Util.sendGAEvent('tasks', 'tasks-modify');
     }
   }.bind(this));
 

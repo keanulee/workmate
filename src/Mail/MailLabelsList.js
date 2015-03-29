@@ -7,11 +7,13 @@ var MailLabelsList = function() {
   this.createMenu();
 
   Gmail.Labels.list(function(data) {
-    this.labels = data.labels;
+    this.labels = data.labels || [];
     this.updateMenu();
   }.bind(this), function() {
     this.menu.hide();
   }.bind(this));
+
+  Util.sendGAEvent('mail', 'mail-labels-list');
 };
 
 MailLabelsList.prototype.createMenu = function() {

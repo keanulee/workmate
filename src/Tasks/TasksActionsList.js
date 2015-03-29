@@ -48,10 +48,14 @@ var TasksActionsList = function(task, tasksList, taskCard) {
           this.menu.hide();
         }.bind(this));
         break;
+
+      Util.sendGAEvent('tasks', 'tasks-modify');
     }
   }.bind(this));
 
   this.menu.show();
+
+  Util.sendGAEvent('tasks', 'tasks-actions-list');
 };
 
 module.exports = TasksActionsList;
