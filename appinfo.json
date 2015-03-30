@@ -9,38 +9,28 @@
     "resources": {
         "media": [
             {
+                "file": "images/menu_icon.png",
+                "name": "IMAGE_MENU_ICON",
+                "type": "png"
+            },
+            {
+                "file": "images/logo_splash.png",
+                "name": "IMAGE_LOGO_SPLASH",
+                "type": "png"
+            },
+            {
+                "file": "images/tile_splash.png",
+                "name": "IMAGE_TILE_SPLASH",
+                "type": "png"
+            },
+            {
                 "file": "fonts/UbuntuMono-Regular.ttf",
                 "name": "MONO_FONT_14",
                 "type": "font"
             },
             {
-                "file": "images/remove.png",
-                "name": "IMAGES_REMOVE_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/pushpin.png",
-                "name": "IMAGES_PUSHPIN_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/envelope.png",
-                "name": "IMAGES_ENVELOPE_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/calendar.png",
-                "name": "IMAGES_CALENDAR_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/refresh.png",
-                "name": "IMAGES_REFRESH_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/warning.png",
-                "name": "IMAGES_WARNING_PNG",
+                "file": "images/uncheck.png",
+                "name": "IMAGES_UNCHECK_PNG",
                 "type": "png"
             },
             {
@@ -50,8 +40,33 @@
                 "type": "png"
             },
             {
-                "file": "images/uncheck.png",
-                "name": "IMAGES_UNCHECK_PNG",
+                "file": "images/warning.png",
+                "name": "IMAGES_WARNING_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/refresh.png",
+                "name": "IMAGES_REFRESH_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/calendar.png",
+                "name": "IMAGES_CALENDAR_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/envelope.png",
+                "name": "IMAGES_ENVELOPE_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/pushpin.png",
+                "name": "IMAGES_PUSHPIN_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/remove.png",
+                "name": "IMAGES_REMOVE_PNG",
                 "type": "png"
             }
         ]
@@ -59,7 +74,7 @@
     "shortName": "Workmate",
     "uuid": "d40e830b-84cc-4a2e-b673-178762b1bc57",
     "versionCode": 1,
-    "versionLabel": "1.0",
+    "versionLabel": "1.1",
     "watchapp": {
         "watchface": false
     }

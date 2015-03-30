@@ -72,10 +72,20 @@ var Gmail = {
                 }
                 
                 numThreadsToCheck--;
-                if (numThreadsToCheck <= 0) callback(data);
+                if (numThreadsToCheck <= 0) {
+                  data.threads = data.threads.filter(function(thread) {
+                    return !!thread.messages;
+                  });
+                  callback(data);
+                }
               }, function(error) {
-                new ErrorCard('Could not get messages');
-                if (errorCallback) errorCallback();
+                numThreadsToCheck--;
+                if (numThreadsToCheck <= 0) {
+                  data.threads = data.threads.filter(function(thread) {
+                    return !!thread.messages;
+                  });
+                  callback(data);
+                }
               });
             });
           } else {
