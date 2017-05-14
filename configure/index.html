@@ -20,6 +20,19 @@
 
   <a class="btn btn-blue" id="signIn">Sign in with Google</a>
   <a class="btn btn-red" id="signOut">Sign out of Google</a>
+
+  <div id="signInInstructions" style="display: none">
+    <p>Open this URL on your phone's web browser:</p>
+    <p>
+      <a href="https://legacy.keanulee.com/workmate/configure/google_oauth.php">
+        https://legacy.keanulee.com/workmate/configure/google_oauth.php
+      </a>
+    </p>
+    <p>Then paste the response in this textbox and press Save:</p>
+    <textarea id="response"></textarea>
+    <a class="btn btn-blue" id="saveResponse">Save</a>
+  </div>
+
   <script>
   var ConfigurePage = {
     data: {},
@@ -45,9 +58,17 @@
     },
 
     signIn: function() {
-      window.location.href =
-        'https://legacy.keanulee.com/workmate/configure/google_oauth.php?state=' +
-        encodeURIComponent(this.returnTo.replace(':','::'));
+      document.getElementById('signInInstructions').style.display = '';
+    },
+
+    saveResponse: function() {
+      try {
+        this.data = JSON.parse(document.getElementById('response').value);
+        window.location.href = this.returnTo +
+          encodeURIComponent(JSON.stringify(this.data));
+      } catch (e) {
+        window.alert('Invalid response');
+      }
     },
 
     signOut: function() {
@@ -64,8 +85,11 @@
   };
 
   document.getElementById('signIn').addEventListener('click', function() {
-    this.innerText = 'Signing in...';
+    document.getElementById('signIn').classList.add('hidden');
     ConfigurePage.signIn();
+  });
+  document.getElementById('saveResponse').addEventListener('click', function() {
+    ConfigurePage.saveResponse();
   });
   document.getElementById('signOut').addEventListener('click', function() {
     this.innerText = 'Signing out...';
